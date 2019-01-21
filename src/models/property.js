@@ -1,7 +1,7 @@
-import { list, edit, save, remove, loadList } from '@/services/project';
+import { list, edit, save, remove, list1 } from '@/services/property';
 
 export default {
-  namespace: 'project',
+  namespace: 'property',
   state: {
     data: {
       content: [],
@@ -9,8 +9,8 @@ export default {
       pageSize: 20,
       total: 0,
     },
-    projectInfo: {},
-    loadList: [],
+    list: [],
+    moduleInfo: {},
   },
 
   effects: {
@@ -19,6 +19,14 @@ export default {
       yield put({
         type: 'listInfo',
         payload: response,
+      });
+    },
+
+    *list1({ payload }, { call, put }) {
+      const response = yield call(list1, payload);
+      yield put({
+        type: 'list1Info',
+        payload: Array.isArray(response) ? response : [],
       });
     },
     *save({ callback, payload }, { call }) {
@@ -30,7 +38,7 @@ export default {
     *edit({ payload }, { call, put }) {
       const response = yield call(edit, payload);
       yield put({
-        type: 'projectInfo',
+        type: 'moduleInfo',
         payload: response,
       });
     },
@@ -39,14 +47,6 @@ export default {
       if (callback) {
         callback(response);
       }
-    },
-
-    *loadList({ payload }, { call, put }) {
-      const response = yield call(loadList, payload);
-      yield put({
-        type: 'loadListInfo',
-        payload: response,
-      });
     },
   },
 
@@ -57,16 +57,16 @@ export default {
         data: action.payload,
       };
     },
-    projectInfo(state, action) {
+    list1Info(state, action) {
       return {
         ...state,
-        projectInfo: action.payload,
+        list: action.payload,
       };
     },
-    loadListInfo(state, action) {
+    moduleInfo(state, action) {
       return {
         ...state,
-        loadList: action.payload,
+        moduleInfo: action.payload,
       };
     },
   },

@@ -1,7 +1,7 @@
-import { list, edit, save, remove, loadList } from '@/services/project';
+import { list, edit, save, remove, download } from '@/services/module';
 
 export default {
-  namespace: 'project',
+  namespace: 'module',
   state: {
     data: {
       content: [],
@@ -9,8 +9,7 @@ export default {
       pageSize: 20,
       total: 0,
     },
-    projectInfo: {},
-    loadList: [],
+    moduleInfo: {},
   },
 
   effects: {
@@ -30,7 +29,7 @@ export default {
     *edit({ payload }, { call, put }) {
       const response = yield call(edit, payload);
       yield put({
-        type: 'projectInfo',
+        type: 'moduleInfo',
         payload: response,
       });
     },
@@ -40,13 +39,11 @@ export default {
         callback(response);
       }
     },
-
-    *loadList({ payload }, { call, put }) {
-      const response = yield call(loadList, payload);
-      yield put({
-        type: 'loadListInfo',
-        payload: response,
-      });
+    *download({ callback, payload }, { call }) {
+      const response = yield call(download, payload);
+      if (callback) {
+        callback(response);
+      }
     },
   },
 
@@ -57,16 +54,10 @@ export default {
         data: action.payload,
       };
     },
-    projectInfo(state, action) {
+    moduleInfo(state, action) {
       return {
         ...state,
-        projectInfo: action.payload,
-      };
-    },
-    loadListInfo(state, action) {
-      return {
-        ...state,
-        loadList: action.payload,
+        moduleInfo: action.payload,
       };
     },
   },
