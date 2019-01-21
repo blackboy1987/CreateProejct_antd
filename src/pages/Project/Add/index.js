@@ -4,6 +4,7 @@ import router from 'umi/router';
 import { FormattedMessage } from 'umi/locale';
 import { Form, Input, Button, Card, message } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import Link from 'umi/link';
 
 const FormItem = Form.Item;
 
@@ -84,8 +85,8 @@ class Add extends PureComponent {
             })(<Input style={{ display: 'none' }} />)}
             <FormItem
               {...formItemLayout}
-              label="項目名稱"
-              extra={projectInfo.id ? '項目名稱不能修改' : null}
+              label="项目名称"
+              extra={projectInfo.id ? '项目不能修改' : '一旦填写将不能修改'}
             >
               {getFieldDecorator('name', {
                 initialValue: projectInfo.name,
@@ -97,7 +98,23 @@ class Add extends PureComponent {
                 ],
               })(<Input readOnly={projectInfo.id ? 'readonly' : ''} />)}
             </FormItem>
-            <FormItem {...formItemLayout} label="項目描述">
+            <FormItem
+              {...formItemLayout}
+              label="包名称"
+              extra={projectInfo.id ? '包名称不能修改' : '一旦填写将不能修改'}
+            >
+              {getFieldDecorator('packageName', {
+                initialValue: projectInfo.packageName,
+                rules: [
+                  {
+                    required: true,
+                    message: '必填',
+                  },
+                ],
+              })(<Input readOnly={projectInfo.id ? 'readonly' : ''} />)}
+            </FormItem>
+
+            <FormItem {...formItemLayout} label="项目描述">
               {getFieldDecorator('memo', {
                 initialValue: projectInfo.memo,
               })(<Input.TextArea autosize={{ minRows: 8, maxRows: 8 }} />)}
@@ -107,7 +124,9 @@ class Add extends PureComponent {
                 <FormattedMessage id="form.save" />
               </Button>
               <Button style={{ marginLeft: 8 }}>重置</Button>
-              <Button style={{ marginLeft: 8 }}>返回</Button>
+              <Link to="/project">
+                <Button style={{ marginLeft: 8 }}>返回</Button>
+              </Link>
             </FormItem>
           </Form>
         </Card>
