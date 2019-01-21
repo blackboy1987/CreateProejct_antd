@@ -256,6 +256,82 @@ export default [
         ],
       },
       {
+        name: 'project',
+        icon: 'project',
+        path: '/project',
+        routes: [
+          {
+            path: '/project',
+            name: 'project',
+            component: './Project/List',
+          },
+          {
+            path: '/project/add',
+            name: 'add',
+            component: './Project/Add',
+          },
+          {
+            path: '/project/edit/:id',
+            name: 'edit',
+            component: './Project/Add',
+          },
+        ],
+      },
+      {
+        name: 'module',
+        icon: 'module',
+        path: '/module',
+        routes: [
+          {
+            path: '/module',
+            name: 'module',
+            component: './Module/List',
+          },
+          {
+            path: '/module/list/:projectId',
+            name: 'module',
+            component: './Module/List',
+          },
+          {
+            path: '/module/add',
+            name: 'add',
+            component: './Module/Add',
+          },
+          {
+            path: '/module/edit/:id',
+            name: 'edit',
+            component: './Module/Add',
+          },
+        ],
+      },
+      {
+        name: 'property',
+        icon: 'property',
+        path: '/property',
+        routes: [
+          {
+            path: '/property',
+            name: 'property',
+            component: './Property/List',
+          },
+          {
+            path: '/property/list/:moduleId',
+            name: 'property',
+            component: './Property/List',
+          },
+          {
+            path: '/property/add',
+            name: 'add',
+            component: './Property/Add',
+          },
+          {
+            path: '/property/edit/:id',
+            name: 'edit',
+            component: './Property/Add',
+          },
+        ],
+      },
+      {
         component: '404',
       },
     ],
