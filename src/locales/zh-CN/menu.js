@@ -35,16 +35,4 @@ export default {
   'menu.account.settings': '个人设置',
   'menu.account.trigger': '触发报错',
   'menu.account.logout': '退出登录',
-
-  'menu.project': '项目管理',
-  'menu.project.add': '添加项目',
-  'menu.project.edit': '编辑项目',
-  'menu.module': '模块管理',
-  'menu.module.module': '模块管理',
-  'menu.module.add': '添加模块',
-  'menu.module.edit': '编辑模块',
-  'menu.property': '属性管理',
-  'menu.property.add': '添加属性',
-  'menu.property.edit': '编辑属性',
-  'menu.property.property': '属性管理',
 };
