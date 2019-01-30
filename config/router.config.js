@@ -275,6 +275,11 @@ export default [
             name: 'edit',
             component: './Project/Add',
           },
+          {
+            path: '/project/module/add/:projectId',
+            name: 'add',
+            component: './Module/Add',
+          },
         ],
       },
       {

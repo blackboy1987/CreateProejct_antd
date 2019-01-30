@@ -14,12 +14,21 @@ const FormItem = Form.Item;
 }))
 @Form.create()
 class Add extends PureComponent {
+  state = {
+    projectId: '',
+  };
+
   componentDidMount() {
     const {
       dispatch,
       match: { params = {} },
     } = this.props;
-    if (params) {
+    if (params.projectId) {
+      this.setState({
+        projectId: params.projectId,
+      });
+    }
+    if (params && params.id) {
       dispatch({
         type: 'module/edit',
         payload: params,
@@ -53,6 +62,7 @@ class Add extends PureComponent {
   };
 
   render() {
+    const { projectId } = this.state;
     const {
       submitting,
       project: { loadList = [] },
@@ -87,9 +97,9 @@ class Add extends PureComponent {
             {getFieldDecorator('id', {
               initialValue: moduleInfo.id,
             })(<Input style={{ display: 'none' }} />)}
-            <FormItem {...formItemLayout} label="項目名稱">
+            <FormItem {...formItemLayout} label="项目名称">
               {getFieldDecorator('projectId', {
-                initialValue: `${moduleInfo.projectId}`,
+                initialValue: `${moduleInfo.projectId || projectId || ''}`,
                 rules: [
                   {
                     required: true,

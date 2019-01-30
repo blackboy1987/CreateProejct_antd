@@ -195,6 +195,7 @@ class List extends PureComponent {
     const {
       module: { data },
       loading,
+      match: { params = {} },
     } = this.props;
     const { selectedRows } = this.state;
     return (
@@ -203,11 +204,19 @@ class List extends PureComponent {
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>{this.renderSimpleForm()}</div>
             <div className={styles.tableListOperator}>
-              <Link to="/module/add">
-                <Button icon="plus" type="primary">
-                  新建
-                </Button>
-              </Link>
+              {params.projectId ? (
+                <Link to={`/project/module/add/${params.projectId}`}>
+                  <Button icon="plus" type="primary">
+                    新建
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/module/add/">
+                  <Button icon="plus" type="primary">
+                    新建
+                  </Button>
+                </Link>
+              )}
             </div>
             <StandardTable
               selectedRows={selectedRows}

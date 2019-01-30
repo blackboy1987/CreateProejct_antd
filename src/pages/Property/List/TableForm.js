@@ -219,6 +219,7 @@ class TableForm extends PureComponent {
                 onChange={e => this.handleFieldChange(e, 'type', record.key)}
                 onKeyPress={e => this.handleKeyPress(e, record.key)}
                 placeholder="类型"
+                showSearch
               >
                 {propertyType.map(item => (
                   <Select.Option key={item.key}>{item.label}</Select.Option>
@@ -297,7 +298,7 @@ class TableForm extends PureComponent {
           loading={loading}
           columns={columns}
           dataSource={data}
-          rowKey={row => row.id}
+          rowKey={row => row.key}
           pagination={false}
           size="small"
           bordered
